@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 module.exports = function(grunt) {
 
     // Project configuration.
@@ -19,6 +21,32 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
 
     // Lotes de tareas(s).
-    grunt.registerTask('Inicializa','Tareas iniciales: Copiar Bootstrap a Public, etc.', ['copy:main']);
+    grunt.registerTask('creaDirs','Crea directorios necesarios', function(error){
+
+        function existeDir(path) {
+            try {
+                return fs.statSync(path).isDirectory();
+            } catch (e) {
+                return false;
+            }
+        }
+
+        if (!existeDir("./public/uploads")){
+            fs.mkdirSync("./public/uploads");
+            console.log("Directorio ./public/upload creado.");
+        } else {
+            console.log("El directorio ./public/upload ya existía.");
+        }
+
+        if (!existeDir("./logs")){
+            fs.mkdirSync("./logs");
+            console.log("Directorio ./logs creado.");
+        }else {
+            console.log("El directorio ./logs ya existía");
+
+        }
+    });
+
+    grunt.registerTask('Inicializa','Tareas iniciales: Crear directorios, Copiar Bootstrap a Public, etc.', ['copy:main','creaDirs']);
 
 };
