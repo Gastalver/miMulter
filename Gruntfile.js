@@ -31,11 +31,11 @@ module.exports = function(grunt) {
             }
         }
 
-        if (!existeDir("./public/uploads")){
-            fs.mkdirSync("./public/uploads");
-            console.log("Directorio ./public/upload creado.");
+        if (!existeDir("./uploads")){
+            fs.mkdirSync("./uploads");
+            console.log("Directorio ./uploadS creado.");
         } else {
-            console.log("El directorio ./public/upload ya existía.");
+            console.log("El directorio ./uploads ya existía.");
         }
 
         if (!existeDir("./logs")){
